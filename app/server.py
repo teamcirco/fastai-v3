@@ -103,7 +103,7 @@ async def analyze(request):
     img = open_image(BytesIO(img_bytes))
     prediction = learn.predict(img)
     probabilities = prediction[2]
-    return JSONResponse({'Area': learn.data.classes[0], 'Probability': tensor.item((probabilities[0][0]))})
+    return JSONResponse({'Area': learn.data.classes[0], 'Probability': probabilities.item([0])})
 
 
 
