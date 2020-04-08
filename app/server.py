@@ -104,7 +104,7 @@ async def analyze(request):
     prediction1 = learn.predict(img)[0]
     prediction2 = learn.predict(img)[1]
     prediction3 = learn.predict(img)[2]
-    return JSONResponse({'result': str(prediction1), str(prediction2), str(prediction3)})
+    return JSONResponse({'result': str(prediction1) str(prediction2) str(prediction3)})
 
 
 if __name__ == '__main__':
