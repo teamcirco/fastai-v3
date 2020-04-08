@@ -9,10 +9,51 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 
-export_file_url = 'https://drive.google.com/uc?export=download&id=1RURCcTZLzDrW6u4eD3PtrSznTkOAZotQ'
+export_file_url = 'https://drive.google.com/uc?export=download&id=1n0Y_KLbaWwuY0uq5UiVjEeXg0Ns6lVEl'
 export_file_name = 'export.pkl'
 
-classes = ['rugby', 'soccer']
+classes = ['Abingdon',
+  'Addison',
+  'Askew',
+  'Avonmore and Brook Green',
+  'Bayswater',
+  'Bloomsbury',
+  'Brompton & Hans Town',
+  'Bryanston and Dorset Square',
+  'Camden Town with Primrose Hill',
+  'Campden',
+  'Chelsea Riverside',
+  'Church Street',
+  'Churchill',
+  'Colville',
+  'Courtfield',
+  'Fulham Reach',
+  'Hammersmith Broadway',
+  'Holborn and Covent Garden',
+  'Holland',
+  'Hyde Park',
+  "King's Cross",
+  'Knightsbridge and Belgravia',
+  'Lancaster Gate',
+  'Marylebone High Street',
+  'Norland',
+  'North End',
+  'Notting Dale',
+  'Pembridge',
+  "Queen's Gate",
+  'Redcliffe',
+  "Regent's Park",
+  'Royal Hospital',
+  "Shepherd's Bush Green",
+  "St James's",
+  'St Pancras and Somers Town',
+  "St. Helen's",
+  'Stanley',
+  'Tachbrook',
+  'Vincent Square',
+  'Warwick',
+  'West End',
+  'Wormholt and White City']
 path = Path(__file__).parent
 
 app = Starlette()
