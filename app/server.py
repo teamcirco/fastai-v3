@@ -8,6 +8,7 @@ from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
+import numpy as np
 
 export_file_url = 'https://drive.google.com/uc?export=download&id=1n0Y_KLbaWwuY0uq5UiVjEeXg0Ns6lVEl'
 export_file_name = 'export.pkl'
@@ -102,8 +103,13 @@ async def analyze(request):
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
     prediction = learn.predict(img)[0]
-    probabilities = learn.predict(img)[2]
-    return JSONResponse({'result': str(prediction), 'probability': str(probabilities)})
+    tensor_probabilities = learn.predict(img)[2]
+    probabilities = np.asarray(tensor_probabilities)
+    classes = learn.data.classes
+    probabilities, classes = zip(*sorted(zip(probabilities, classes), reverse=True))
+    predictions = dict(zip(classes, probabilities))    
+
+    return JSONResponse({'result': str(prediction), 'probability': str(predictions)})
   
   
 if __name__ == '__main__':
