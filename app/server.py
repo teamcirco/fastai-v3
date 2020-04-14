@@ -13,48 +13,6 @@ import numpy as np
 export_file_url = 'https://drive.google.com/uc?export=download&id=1n0Y_KLbaWwuY0uq5UiVjEeXg0Ns6lVEl'
 export_file_name = 'export.pkl'
 
-classes = ['Abingdon',
-  'Addison',
-  'Askew',
-  'Avonmore and Brook Green',
-  'Bayswater',
-  'Bloomsbury',
-  'Brompton & Hans Town',
-  'Bryanston and Dorset Square',
-  'Camden Town with Primrose Hill',
-  'Campden',
-  'Chelsea Riverside',
-  'Church Street',
-  'Churchill',
-  'Colville',
-  'Courtfield',
-  'Fulham Reach',
-  'Hammersmith Broadway',
-  'Holborn and Covent Garden',
-  'Holland',
-  'Hyde Park',
-  "King's Cross",
-  'Knightsbridge and Belgravia',
-  'Lancaster Gate',
-  'Marylebone High Street',
-  'Norland',
-  'North End',
-  'Notting Dale',
-  'Pembridge',
-  "Queen's Gate",
-  'Redcliffe',
-  "Regent's Park",
-  'Royal Hospital',
-  "Shepherd's Bush Green",
-  "St James's",
-  'St Pancras and Somers Town',
-  "St. Helen's",
-  'Stanley',
-  'Tachbrook',
-  'Vincent Square',
-  'Warwick',
-  'West End',
-  'Wormholt and White City']
 path = Path(__file__).parent
 
 app = Starlette()
@@ -103,13 +61,18 @@ async def analyze(request):
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
     prediction = learn.predict(img)[0]
-    tensor_probabilities = learn.predict(img)[2]
-    probabilities = np.asarray(tensor_probabilities)
-    classes = learn.data.classes
-    probabilities, classes = zip(*sorted(zip(probabilities, classes), reverse=True))
-    predictions = dict(zip(classes, probabilities))    
+    #tensor_probabilities = learn.predict(img)[2]
+    #probabilities = np.asarray(tensor_probabilities)
+    #classes = learn.data.classes
+    #probabilities, classes = zip(*sorted(zip(probabilities, classes), reverse=True))
+    #predictions = dict(zip(classes, probabilities))    
 
-    return JSONResponse({'result': str(prediction), 'probability': str(predictions)})
+    for p in prediction: p.replace('_', ' ')
+    for p in prediction: p.title()
+    if prediction == '[]':
+		  prediction = 'Could not recognize any classes, perhaps try another photo?'
+    return JSONResponse({'result' : prediction})
+    
   
   
 if __name__ == '__main__':
