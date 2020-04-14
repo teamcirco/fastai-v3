@@ -68,7 +68,7 @@ async def analyze(request):
     #predictions = dict(zip(classes, probabilities))   
     #for p in prediction: p.replace('_', ' ')
     #for p in prediction: p.title()
-    if prediction == '[]': prediction = 'Could not recognize any classes, perhaps try another photo?'
+    #if prediction == '[]': prediction = 'Could not recognize any classes, perhaps try another photo?'
     return JSONResponse({'result' : prediction})
 
   
