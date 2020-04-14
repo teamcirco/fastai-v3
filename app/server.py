@@ -69,7 +69,7 @@ async def analyze(request):
     #for p in prediction: p.replace('_', ' ')
     #for p in prediction: p.title()
     #if prediction == '[]': prediction = 'Could not recognize any classes, perhaps try another photo?'
-    return JSONResponse({'result' : prediction})
+    return JSONResponse({'result' : str(prediction)})
 
   
 if __name__ == '__main__':
