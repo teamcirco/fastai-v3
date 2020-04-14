@@ -66,14 +66,11 @@ async def analyze(request):
     #classes = learn.data.classes
     #probabilities, classes = zip(*sorted(zip(probabilities, classes), reverse=True))
     #predictions = dict(zip(classes, probabilities))    
-
     for p in prediction: p.replace('_', ' ')
     for p in prediction: p.title()
-    if prediction == '[]':
-	prediction = 'Could not recognize any classes, perhaps try another photo?'
+    if prediction == '[]': prediction = 'Could not recognize any classes, perhaps try another photo?'
     return JSONResponse({'result' : prediction})
-    
-  
+
   
 if __name__ == '__main__':
     if 'serve' in sys.argv:
