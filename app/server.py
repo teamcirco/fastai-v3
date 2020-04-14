@@ -65,9 +65,9 @@ async def analyze(request):
     #probabilities = np.asarray(tensor_probabilities)
     #classes = learn.data.classes
     #probabilities, classes = zip(*sorted(zip(probabilities, classes), reverse=True))
-    #predictions = dict(zip(classes, probabilities))    
-    for p in prediction: p.replace('_', ' ')
-    for p in prediction: p.title()
+    #predictions = dict(zip(classes, probabilities))   
+    #for p in prediction: p.replace('_', ' ')
+    #for p in prediction: p.title()
     if prediction == '[]': prediction = 'Could not recognize any classes, perhaps try another photo?'
     return JSONResponse({'result' : prediction})
 
